@@ -842,16 +842,14 @@ so before pointing it to null free the assigned memory.
 int vdls(char *bufferPtr) 	      	  // using first 4 bytes to define size of buffer
 {                                        // next 1 byte as flag for is there yet other file names to copy.
 
-//printf("\n----vdls()---0--|\n");
 
 if(head_fileList == NULL)                // 0 : no file names    1: there are file names to copy
-{    //printf("here 1 \n" );
+{
 
     return 1;   // no files on the disk
 }
  struct fileNode *fNode  = *(struct fileNode **)(bufferPtr+4);
 
-// printf("here 1.0 \n" );
 
 
 char *filesName = bufferPtr+5;
@@ -859,7 +857,6 @@ char *filesName = bufferPtr+5;
  int bufferCapacity = *( int *)(bufferPtr);  // total lenght
 
  int fileNameLength=0;
-//*(bufferPtr+4 )= (unsigned char)1;
 
 int f_cnt=0;
 int b_cnt;
@@ -869,11 +866,10 @@ while(fNode)
      size_t temp_bufferLength = bufferLength;
     fileNameLength = strlen(fNode->fileName);
 
-//printf("here 2 \n");
 
 
 if((bufferCapacity-bufferLength) >= (fileNameLength+2) )       // extra 2 for comma(delimeter) and nullbyte.
-{//printf("here 3 \n" );
+{
        if(bufferLength > 12)
         bufferPtr[bufferLength++] = ',';
 
@@ -881,8 +877,7 @@ if((bufferCapacity-bufferLength) >= (fileNameLength+2) )       // extra 2 for co
     {
          if(fNode->fileName[f_cnt] == '\\')
         {
-//printf("here 4 \n" );
-            if(bufferLength+3 >= bufferCapacity )
+             if(bufferLength+3 >= bufferCapacity )
             {
                 memset(bufferPtr + temp_bufferLength,0,bufferLength-temp_bufferLength);  // clearing partialy wrote last file name as no enogh space avaiable
                 bufferLength = temp_bufferLength;
@@ -900,8 +895,7 @@ if((bufferCapacity-bufferLength) >= (fileNameLength+2) )       // extra 2 for co
 
         else if(fNode->fileName[f_cnt] == ',')
         {
-//printf("here 5 \n" );
-                if(bufferLength+3 >= bufferCapacity )
+                 if(bufferLength+3 >= bufferCapacity )
                 {
                      memset(bufferPtr+ temp_bufferLength,0,bufferLength-temp_bufferLength);  // clearing partialy wrote last file name as no enogh space avaiable
                     bufferLength = temp_bufferLength;
@@ -1046,8 +1040,7 @@ unsigned long int *freeBlocksIndexes;
 
  if(result = getFreeBlocks(sizeOfFile,&freeBlocksIndexes))
  {
-  //  printf("sizeOfFile: %zd\n",sizeOfFile );
-free(vd_fileName);
+ free(vd_fileName);
  return 6;
  	// handle error
  }
@@ -1127,7 +1120,6 @@ if(result ==2)
 
 result = compareFile(adFilePath,fNode);
 
-//printf("compareFile() --> %d\n",result );       // debugg
 
 if(result==0)
 printf("File \"%s\" copied successfuly as \"%s\".\n",adFilePath,newFileName);            // debugg
@@ -1362,7 +1354,6 @@ for(blockCnt=0; blockCnt<noOfBlocks; blockCnt++)  // readDiskBlock(int fd, int b
              return 125;
                }
 
-
                   }
 }
 
@@ -1450,8 +1441,7 @@ continue;
  if((strcmp(command,"h")==0) || (strcmp(command,"help")==0))
 {
 
-//printf("here 2.01\n");// debugg
-   help();
+    help();
 }
 
 
@@ -1541,7 +1531,6 @@ else if(result == 13 )
 
 else if(strcmp(command,"vdcpfrom")==0)
 {
-//printf("vdcpfrom-------> <%s> <%s> \n",arguments[0], arguments[1] );
 
     if(strcmp(arguments[1],"\0")==0)
     {
@@ -1583,8 +1572,7 @@ else if(result ==10)
 
 else if(result ==454)
 printf(" file \"%s\" already exist! choose different file name \n",arguments[0]);
-//	getFileName();
-
+ 
 continue;
 }
 
@@ -1658,4 +1646,3 @@ else if(result==7)
 return 0;
 
 }
-

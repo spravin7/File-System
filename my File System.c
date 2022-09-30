@@ -1447,7 +1447,7 @@ continue;
 
 else if(strcmp(command,"vdls")==0)
 {
-printf("here 1466\n");
+ 
 if(!head_fileList)
 {
 printf("VD is empty !\n");

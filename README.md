@@ -2,6 +2,15 @@
 file system using C
 
 
+
+Sample input and ouptut
+
+	https://github.com/spravin7/File-System/issues/1
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
               Commands
 
 
